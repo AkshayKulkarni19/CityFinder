@@ -8,11 +8,23 @@
 
 /* Begin PBXBuildFile section */
 		7930CCDE2285A8BE00614030 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CCDD2285A8BE00614030 /* AppDelegate.swift */; };
-		7930CCE02285A8BE00614030 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CCDF2285A8BE00614030 /* ViewController.swift */; };
+		7930CCE02285A8BE00614030 /* CityFinderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CCDF2285A8BE00614030 /* CityFinderViewController.swift */; };
 		7930CCE32285A8BE00614030 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7930CCE12285A8BE00614030 /* Main.storyboard */; };
 		7930CCE52285A8C000614030 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7930CCE42285A8C000614030 /* Assets.xcassets */; };
 		7930CCE82285A8C000614030 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7930CCE62285A8C000614030 /* LaunchScreen.storyboard */; };
 		7930CCF32285A8C000614030 /* City_FinderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CCF22285A8C000614030 /* City_FinderTests.swift */; };
+		7930CD152285AF3C00614030 /* CityInfoResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD092285AF3C00614030 /* CityInfoResponse.swift */; };
+		7930CD162285AF3C00614030 /* CityListRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD0C2285AF3C00614030 /* CityListRepository.swift */; };
+		7930CD182285AF3C00614030 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD0F2285AF3C00614030 /* Result.swift */; };
+		7930CD192285AF3C00614030 /* ParseUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD102285AF3C00614030 /* ParseUtil.swift */; };
+		7930CD1A2285AF3C00614030 /* cities.json in Resources */ = {isa = PBXBuildFile; fileRef = 7930CD122285AF3C00614030 /* cities.json */; };
+		7930CD1B2285AF3C00614030 /* FileReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD142285AF3C00614030 /* FileReader.swift */; };
+		7930CD212285BC6300614030 /* CitiesListUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD202285BC6300614030 /* CitiesListUseCase.swift */; };
+		7930CD232285BDDE00614030 /* CityInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD222285BDDE00614030 /* CityInfo.swift */; };
+		7930CD262285BEA500614030 /* CityUIMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD252285BEA500614030 /* CityUIMapper.swift */; };
+		7930CD292285CB3A00614030 /* CityFinderPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD282285CB3A00614030 /* CityFinderPresenter.swift */; };
+		7930CD2B2285CB7700614030 /* CityFinderConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD2A2285CB7700614030 /* CityFinderConfigurator.swift */; };
+		7930CD2D2285D10D00614030 /* CitiesListServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD2C2285D10D00614030 /* CitiesListServices.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -28,7 +40,7 @@
 /* Begin PBXFileReference section */
 		7930CCDA2285A8BE00614030 /* City Finder.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "City Finder.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7930CCDD2285A8BE00614030 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		7930CCDF2285A8BE00614030 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		7930CCDF2285A8BE00614030 /* CityFinderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderViewController.swift; sourceTree = "<group>"; };
 		7930CCE22285A8BE00614030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		7930CCE42285A8C000614030 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7930CCE72285A8C000614030 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -36,6 +48,18 @@
 		7930CCEE2285A8C000614030 /* City FinderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "City FinderTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		7930CCF22285A8C000614030 /* City_FinderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = City_FinderTests.swift; sourceTree = "<group>"; };
 		7930CCF42285A8C000614030 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7930CD092285AF3C00614030 /* CityInfoResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityInfoResponse.swift; sourceTree = "<group>"; };
+		7930CD0C2285AF3C00614030 /* CityListRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CityListRepository.swift; sourceTree = "<group>"; };
+		7930CD0F2285AF3C00614030 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		7930CD102285AF3C00614030 /* ParseUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUtil.swift; sourceTree = "<group>"; };
+		7930CD122285AF3C00614030 /* cities.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = cities.json; sourceTree = "<group>"; };
+		7930CD142285AF3C00614030 /* FileReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileReader.swift; sourceTree = "<group>"; };
+		7930CD202285BC6300614030 /* CitiesListUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CitiesListUseCase.swift; sourceTree = "<group>"; };
+		7930CD222285BDDE00614030 /* CityInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityInfo.swift; sourceTree = "<group>"; };
+		7930CD252285BEA500614030 /* CityUIMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityUIMapper.swift; sourceTree = "<group>"; };
+		7930CD282285CB3A00614030 /* CityFinderPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderPresenter.swift; sourceTree = "<group>"; };
+		7930CD2A2285CB7700614030 /* CityFinderConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityFinderConfigurator.swift; sourceTree = "<group>"; };
+		7930CD2C2285D10D00614030 /* CitiesListServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesListServices.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,8 +101,10 @@
 		7930CCDC2285A8BE00614030 /* City Finder */ = {
 			isa = PBXGroup;
 			children = (
+				7930CD272285CAF200614030 /* Presenter */,
+				7930CD1C2285BC0000614030 /* Domain */,
+				7930CCFD2285AAB300614030 /* Data */,
 				7930CCDD2285A8BE00614030 /* AppDelegate.swift */,
-				7930CCDF2285A8BE00614030 /* ViewController.swift */,
 				7930CCE12285A8BE00614030 /* Main.storyboard */,
 				7930CCE42285A8C000614030 /* Assets.xcassets */,
 				7930CCE62285A8C000614030 /* LaunchScreen.storyboard */,
@@ -94,6 +120,120 @@
 				7930CCF42285A8C000614030 /* Info.plist */,
 			);
 			path = "City FinderTests";
+			sourceTree = "<group>";
+		};
+		7930CCFD2285AAB300614030 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD082285AF3C00614030 /* Entity */,
+				7930CD132285AF3C00614030 /* FileManager */,
+				7930CD112285AF3C00614030 /* Resource */,
+				7930CD0A2285AF3C00614030 /* Services */,
+				7930CD0E2285AF3C00614030 /* Utils */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		7930CD082285AF3C00614030 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD092285AF3C00614030 /* CityInfoResponse.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		7930CD0A2285AF3C00614030 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD0B2285AF3C00614030 /* Cities */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		7930CD0B2285AF3C00614030 /* Cities */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD2C2285D10D00614030 /* CitiesListServices.swift */,
+				7930CD0C2285AF3C00614030 /* CityListRepository.swift */,
+			);
+			path = Cities;
+			sourceTree = "<group>";
+		};
+		7930CD0E2285AF3C00614030 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD0F2285AF3C00614030 /* Result.swift */,
+				7930CD102285AF3C00614030 /* ParseUtil.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		7930CD112285AF3C00614030 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD122285AF3C00614030 /* cities.json */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
+		7930CD132285AF3C00614030 /* FileManager */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD142285AF3C00614030 /* FileReader.swift */,
+			);
+			path = FileManager;
+			sourceTree = "<group>";
+		};
+		7930CD1C2285BC0000614030 /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD242285BE8D00614030 /* Mapper */,
+				7930CD1E2285BC1700614030 /* UseCase */,
+				7930CD1D2285BC0F00614030 /* Entity */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		7930CD1D2285BC0F00614030 /* Entity */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD222285BDDE00614030 /* CityInfo.swift */,
+			);
+			path = Entity;
+			sourceTree = "<group>";
+		};
+		7930CD1E2285BC1700614030 /* UseCase */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD1F2285BC2200614030 /* CityList */,
+			);
+			path = UseCase;
+			sourceTree = "<group>";
+		};
+		7930CD1F2285BC2200614030 /* CityList */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD202285BC6300614030 /* CitiesListUseCase.swift */,
+			);
+			path = CityList;
+			sourceTree = "<group>";
+		};
+		7930CD242285BE8D00614030 /* Mapper */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD252285BEA500614030 /* CityUIMapper.swift */,
+			);
+			path = Mapper;
+			sourceTree = "<group>";
+		};
+		7930CD272285CAF200614030 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				7930CCDF2285A8BE00614030 /* CityFinderViewController.swift */,
+				7930CD282285CB3A00614030 /* CityFinderPresenter.swift */,
+				7930CD2A2285CB7700614030 /* CityFinderConfigurator.swift */,
+			);
+			path = Presenter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -177,6 +317,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7930CD1A2285AF3C00614030 /* cities.json in Resources */,
 				7930CCE82285A8C000614030 /* LaunchScreen.storyboard in Resources */,
 				7930CCE52285A8C000614030 /* Assets.xcassets in Resources */,
 				7930CCE32285A8BE00614030 /* Main.storyboard in Resources */,
@@ -197,8 +338,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7930CCE02285A8BE00614030 /* ViewController.swift in Sources */,
+				7930CD182285AF3C00614030 /* Result.swift in Sources */,
+				7930CD2B2285CB7700614030 /* CityFinderConfigurator.swift in Sources */,
+				7930CCE02285A8BE00614030 /* CityFinderViewController.swift in Sources */,
+				7930CD232285BDDE00614030 /* CityInfo.swift in Sources */,
+				7930CD2D2285D10D00614030 /* CitiesListServices.swift in Sources */,
+				7930CD262285BEA500614030 /* CityUIMapper.swift in Sources */,
+				7930CD152285AF3C00614030 /* CityInfoResponse.swift in Sources */,
+				7930CD292285CB3A00614030 /* CityFinderPresenter.swift in Sources */,
+				7930CD162285AF3C00614030 /* CityListRepository.swift in Sources */,
+				7930CD192285AF3C00614030 /* ParseUtil.swift in Sources */,
+				7930CD1B2285AF3C00614030 /* FileReader.swift in Sources */,
 				7930CCDE2285A8BE00614030 /* AppDelegate.swift in Sources */,
+				7930CD212285BC6300614030 /* CitiesListUseCase.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
