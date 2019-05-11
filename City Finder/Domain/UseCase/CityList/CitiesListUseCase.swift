@@ -17,23 +17,26 @@ protocol CityListUseCase {
 class CityListUseCaseImpl: CityListUseCase {
     
     private var cityListRepository: CityListRepository
-    
+    private var cityListInfo = [CityInfo]()
     init(cityListRepository: CityListRepository) {
         self.cityListRepository = cityListRepository
     }
     
     func fetchCityListFromJSON(completionHandler: @escaping CityListCompletion) {
-        self.cityListRepository.fetchCityListFromJSON { (response) in
-            
-            switch response {
-            case .success(let cityListInfo):
-                let cityList = CityUIMapper.convertUImodel(cityListInfo: cityListInfo)
-                completionHandler(.success(cityList))
-                
-            case .failure(let error):
-                completionHandler(.failure(error))
+        
+        if cityListInfo.isEmpty {
+            self.cityListRepository.fetchCityListFromJSON {[weak self] (response) in
+                guard let weakself = self else { return }
+                switch response {
+                case .success(let cityListInfo):
+                    weakself.cityListInfo = CityUIMapper.convertUImodel(cityListInfo: cityListInfo)
+                    completionHandler(.success(weakself.cityListInfo))
+                case .failure(let error):
+                    completionHandler(.failure(error))
+                }
             }
-            
+        } else {
+            completionHandler(.success(self.cityListInfo))
         }
     }
 }

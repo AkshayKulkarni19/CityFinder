@@ -26,7 +26,7 @@ struct CityInfoResponse: Codable {
     var _id: Int?
     var coord: Coord
     var country: String = ""
-    var name: String?
+    var name: String = ""
 }
 
 struct Coord: Codable {
