@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct CityUIMapper {
     
@@ -15,7 +16,7 @@ struct CityUIMapper {
         return cityListInfo.compactMap{ CityInfo(coord: Coordinate(lat: $0.coord.lat,
                                                    lon: $0.coord.lon),
                                  country: $0.country,
-                                 name: $0.name )}.sorted(by: { $0.name < $1.name })
+                                 name: $0.name, distanceFromCurrentLocation: nil )}.sorted(by: { $0.name < $1.name })
 
     }
 }

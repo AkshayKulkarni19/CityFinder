@@ -27,6 +27,7 @@
 		7930CD2D2285D10D00614030 /* CitiesListServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD2C2285D10D00614030 /* CitiesListServices.swift */; };
 		7930CD312285F77C00614030 /* CityTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD2F2285F77C00614030 /* CityTableViewCell.swift */; };
 		7930CD322285F77C00614030 /* CityTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 7930CD302285F77C00614030 /* CityTableViewCell.xib */; };
+		7930CD352287E11300614030 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7930CD342287E11300614030 /* LocationManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -64,6 +65,7 @@
 		7930CD2C2285D10D00614030 /* CitiesListServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CitiesListServices.swift; sourceTree = "<group>"; };
 		7930CD2F2285F77C00614030 /* CityTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityTableViewCell.swift; sourceTree = "<group>"; };
 		7930CD302285F77C00614030 /* CityTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CityTableViewCell.xib; sourceTree = "<group>"; };
+		7930CD342287E11300614030 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 		7930CCDC2285A8BE00614030 /* City Finder */ = {
 			isa = PBXGroup;
 			children = (
+				7930CD332287E0EC00614030 /* Device */,
 				7930CD272285CAF200614030 /* Presenter */,
 				7930CD1C2285BC0000614030 /* Domain */,
 				7930CCFD2285AAB300614030 /* Data */,
@@ -250,6 +253,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		7930CD332287E0EC00614030 /* Device */ = {
+			isa = PBXGroup;
+			children = (
+				7930CD342287E11300614030 /* LocationManager.swift */,
+			);
+			path = Device;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -355,6 +366,7 @@
 			files = (
 				7930CD182285AF3C00614030 /* Result.swift in Sources */,
 				7930CD2B2285CB7700614030 /* CityFinderConfigurator.swift in Sources */,
+				7930CD352287E11300614030 /* LocationManager.swift in Sources */,
 				7930CCE02285A8BE00614030 /* CityFinderViewController.swift in Sources */,
 				7930CD232285BDDE00614030 /* CityInfo.swift in Sources */,
 				7930CD2D2285D10D00614030 /* CitiesListServices.swift in Sources */,
@@ -528,8 +540,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K3AXGLNTDZ;
+				DEVELOPMENT_TEAM = 5H9FK6Y72L;
 				INFOPLIST_FILE = "City Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -537,6 +550,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Akshay.City-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -546,8 +560,9 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = K3AXGLNTDZ;
+				DEVELOPMENT_TEAM = 5H9FK6Y72L;
 				INFOPLIST_FILE = "City Finder/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -555,6 +570,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "Akshay.City-Finder";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

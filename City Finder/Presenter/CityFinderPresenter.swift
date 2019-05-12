@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol CityFinderPresenter {
     func getNumberOfCities() -> Int
@@ -53,11 +54,13 @@ class CityFinderPresenterImpl: CityFinderPresenter {
     
     func filterContentForSearchText(_ searchText: String) {
 //        filteredCityListInfo = allCityListInfo.filter{ $0.name.lowercased().starts(with: searchText.lowercased()) }
-        filteredCityListInfo = allCityListInfo.filter({( city : CityInfo) -> Bool in
-            print(searchText)
-            return city.name.lowercased().starts(with:searchText)
+        filteredCityListInfo = allCityListInfo.filter({( city: CityInfo) -> Bool in
+            var filteredCity = city
+            filteredCity.distanceFromCurrentLocation =  LocationServiceManager.shared.getCurrentLocation?.distance(from: CLLocation(latitude: city.coord.lat, longitude: city.coord.lon))
+            return filteredCity.name.lowercased().starts(with:searchText)
         })
         cityFinderView?.reloadData()
     }
+
 }
 
