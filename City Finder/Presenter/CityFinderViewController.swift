@@ -25,15 +25,31 @@ class CityFinderViewController: UIViewController {
     
     let configurator = CityFinderConfiguratorImpl()
     var presenter: CityFinderPresenter?
+    let searchController = UISearchController(searchResultsController: nil)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         configurator.configure(viewController: self)
+        
+        // Setup the Search Controller
+        searchController.searchResultsUpdater = self
+        searchController.obscuresBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search City"
+        navigationItem.searchController = searchController
+        navigationItem.hidesSearchBarWhenScrolling = false
+        definesPresentationContext = true
+
     }
 }
 
 extension CityFinderViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let searchText = searchController.searchBar.text {
+            if searchController.isActive && !searchText.isEmpty {
+                return presenter?.getNumberOfCities() ?? 0
+            }
+        }
         return presenter?.getNumberOfCities() ?? 0
     }
     
@@ -52,5 +68,13 @@ extension CityFinderViewController: CityFinderView {
     
     func reloadData() {
         cityListTableView.reloadData()
+    }
+}
+
+extension CityFinderViewController: UISearchResultsUpdating {
+    
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let searchText = searchController.searchBar.text else { return }
+        presenter?.filterContentForSearchText(searchText.lowercased())
     }
 }
