@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias CityListCompletion = (_ cityList: Result<[CityInfo]>) -> Void
+typealias CityListCompletion = (_ cityList: Result<(CityDictionary, [CityInfo])>) -> Void
 
 protocol CityListUseCase {
     func fetchCityListFromJSON(completionHandler: @escaping CityListCompletion)
@@ -18,6 +18,7 @@ class CityListUseCaseImpl: CityListUseCase {
     
     private var cityListRepository: CityListRepository
     private var cityListInfo = [CityInfo]()
+    private var cityListDict = CityDictionary(dictionaryOfCity: [Character : [CityInfo]]())
     init(cityListRepository: CityListRepository) {
         self.cityListRepository = cityListRepository
     }
@@ -29,14 +30,14 @@ class CityListUseCaseImpl: CityListUseCase {
                 guard let weakself = self else { return }
                 switch response {
                 case .success(let cityListInfo):
-                    weakself.cityListInfo = CityUIMapper.convertUImodel(cityListInfo: cityListInfo)
-                    completionHandler(.success(weakself.cityListInfo))
+                    (weakself.cityListDict, weakself.cityListInfo) = CityUIMapper.convertUImodel(cityListInfo: cityListInfo)
+                    completionHandler(.success((weakself.cityListDict, weakself.cityListInfo)))
                 case .failure(let error):
                     completionHandler(.failure(error))
                 }
             }
         } else {
-            completionHandler(.success(self.cityListInfo))
+            completionHandler(.success((self.cityListDict, self.cityListInfo)))
         }
     }
 }

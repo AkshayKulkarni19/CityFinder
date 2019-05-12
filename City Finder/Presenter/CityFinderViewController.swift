@@ -19,12 +19,14 @@ class CityFinderViewController: UIViewController {
             cityListTableView.delegate = self
             cityListTableView.dataSource = self
             cityListTableView.register(UINib(nibName: "CityTableViewCell", bundle: nil), forCellReuseIdentifier: "CityTableViewCell")
+            cityListTableView.register(UINib(nibName: "ErrorTableViewCell", bundle: nil), forCellReuseIdentifier: "ErrorTableViewCell")
             cityListTableView.rowHeight = UITableView.automaticDimension
         }
     }
     
     let configurator = CityFinderConfiguratorImpl()
     var presenter: CityFinderPresenter?
+    var isNoCityExists = false
     let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
@@ -41,26 +43,47 @@ class CityFinderViewController: UIViewController {
         definesPresentationContext = true
 
     }
+    
+    func isSearchActive() -> Bool {
+        return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
+    }
 }
 
 extension CityFinderViewController: UITableViewDelegate, UITableViewDataSource {
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if let searchText = searchController.searchBar.text {
-            if searchController.isActive && !searchText.isEmpty {
-                return presenter?.getNumberOfCities() ?? 0
-            }
+        if presenter?.getListOfCities(withSearch: isSearchActive()) == 0{
+            isNoCityExists = true
+            return 1
+        } else {
+            isNoCityExists = false
         }
-        return presenter?.getNumberOfCities() ?? 0
+        return presenter?.getListOfCities(withSearch: isSearchActive()) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cityTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CityTableViewCell", for: indexPath) as? CityTableViewCell{
-            if let city = presenter?.city(at: indexPath.row) {
+        
+        if isNoCityExists {
+            if let errorTableViewCell = tableView.dequeueReusableCell(withIdentifier: "ErrorTableViewCell", for: indexPath) as? ErrorTableViewCell{
+                return errorTableViewCell
+            }
+        } else if let cityTableViewCell = tableView.dequeueReusableCell(withIdentifier: "CityTableViewCell", for: indexPath) as? CityTableViewCell{
+            
+            if let city = presenter?.city(at: indexPath.row, withSearch: isSearchActive()) {
                 cityTableViewCell.configureCell(with: city)
             }
+            
             return cityTableViewCell
         }
+        
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if isNoCityExists {
+            return tableView.frame.size.height
+        }
+        return UITableView.automaticDimension
     }
 }
 
@@ -75,6 +98,6 @@ extension CityFinderViewController: UISearchResultsUpdating {
     
     func updateSearchResults(for searchController: UISearchController) {
         guard let searchText = searchController.searchBar.text else { return }
-        presenter?.filterContentForSearchText(searchText.lowercased())
+        presenter?.filterContentForSearchText(searchText.uppercased())
     }
 }
