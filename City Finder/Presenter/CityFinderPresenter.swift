@@ -24,6 +24,9 @@ class CityFinderPresenterImpl: CityFinderPresenter {
     var filteredCityListInfo = [CityInfo]()
     var allCityListInfo = [CityInfo]()
     
+    /// For unit test case
+    var fetchListcompletion: (() -> (Void))?
+    
     init(cityListUseCase: CityListUseCase, cityFinderView: CityFinderView) {
         self.cityListUseCase = cityListUseCase
         self.cityFinderView = cityFinderView
@@ -41,9 +44,11 @@ class CityFinderPresenterImpl: CityFinderPresenter {
                     DispatchQueue.main.async {
                         self?.cityFinderView?.reloadData()
                         self?.cityFinderView?.hideIndicator()
+                        self?.fetchListcompletion?()
                     }
                 case .failure(let error):
                     print(error.localizedDescription)
+                    self?.fetchListcompletion?()
                 }
             }
         }
