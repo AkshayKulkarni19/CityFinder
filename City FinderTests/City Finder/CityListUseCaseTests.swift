@@ -11,9 +11,13 @@ import XCTest
 
 class CityListUseCaseTests: XCTestCase {
     
+    var useCase: CityListUseCase!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
+        let service = CitiesListServicesMock()
+        let repository = CityListRepositoryImpl(cityListServices: service)
+        useCase  = CityListUseCaseImpl(cityListRepository: repository)
     }
 
     override func tearDown() {
@@ -21,8 +25,22 @@ class CityListUseCaseTests: XCTestCase {
     }
 
     func testExample() {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+        
+        let expections = expectation(description: "")
+        
+        useCase.fetchCityListFromJSON { (result) in
+            
+            switch result {
+            case .success(let cityDict, let cityListInfo):
+                print("*************** \(cityListInfo.count)")
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+            expections.fulfill()
+        }
+        waitForExpectations(timeout: 30) { (error) in
+            print("*************** \(error)")
+        }
     }
 
     func testPerformanceExample() {
