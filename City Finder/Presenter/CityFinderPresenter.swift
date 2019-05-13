@@ -13,32 +13,38 @@ protocol CityFinderPresenter {
     func getListOfCities(withSearch: Bool) -> Int
     func city(at index: Int, withSearch: Bool) -> CityInfo
     func filterContentForSearchText(_ searchText: String)
+    func fetchCityList()
 }
 
 class CityFinderPresenterImpl: CityFinderPresenter {
 
-    private let cityListUseCase: CityListUseCase
+    let cityListUseCase: CityListUseCase
     private weak var cityFinderView: CityFinderView?
-    private var dictionaryOfCityList = CityDictionary(dictionaryOfCity: [Character : [CityInfo]]())
-    private var filteredCityListInfo = [CityInfo]()
-    private var allCityListInfo = [CityInfo]()
+    var dictionaryOfCityList = CityDictionary(dictionaryOfCity: [Character : [CityInfo]]())
+    var filteredCityListInfo = [CityInfo]()
+    var allCityListInfo = [CityInfo]()
     
     init(cityListUseCase: CityListUseCase, cityFinderView: CityFinderView) {
         self.cityListUseCase = cityListUseCase
         self.cityFinderView = cityFinderView
-        self.fetchCityList()
     }
     
-    private func fetchCityList() {
-        cityListUseCase.fetchCityListFromJSON {[weak self] (result) in
-        
-            switch result {
-            case .success(let cityDict, let cityListInfo):
-                self?.allCityListInfo = cityListInfo
-                self?.dictionaryOfCityList = cityDict
-                self?.cityFinderView?.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
+    func fetchCityList() {
+        cityFinderView?.showIndicator()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.cityListUseCase.fetchCityListFromJSON {[weak self] (result) in
+            
+                switch result {
+                case .success(let cityDict, let cityListInfo):
+                    self?.allCityListInfo = cityListInfo
+                    self?.dictionaryOfCityList = cityDict
+                    DispatchQueue.main.async {
+                        self?.cityFinderView?.reloadData()
+                        self?.cityFinderView?.hideIndicator()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }

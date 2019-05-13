@@ -24,7 +24,7 @@ class CityTableViewCell: UITableViewCell {
         cityName.text = city.name
         country.text = city.country
         if let distance = city.distanceFromCurrentLocation {
-            distanceLabel.text = String(format:"%.1f", distance)
+            distanceLabel.text = String(format:"%.1f", distance) + "Distance.Measure".localized
             distanceLabel.isHidden = false
         }
     }

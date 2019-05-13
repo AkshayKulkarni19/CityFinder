@@ -1,16 +1,17 @@
 //
-//  City_FinderTests.swift
+//  CityListUseCaseTests.swift
 //  City FinderTests
 //
-//  Created by Akshay Kulkarni on 10/05/19.
+//  Created by Akshay Kulkarni on 13/05/19.
 //  Copyright © 2019 Akshay. All rights reserved.
 //
 
 import XCTest
 @testable import City_Finder
 
-class City_FinderTests: XCTestCase {
-
+class CityListUseCaseTests: XCTestCase {
+    
+    
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
@@ -30,9 +31,4 @@ class City_FinderTests: XCTestCase {
             // Put the code you want to measure the time of here.
         }
     }
-    
-    func testSearchTextExists() {
-        
-    }
-
 }

@@ -10,6 +10,8 @@ import UIKit
 
 protocol CityFinderView: class {
     func reloadData()
+    func showIndicator()
+    func hideIndicator()
 }
 
 class CityFinderViewController: UIViewController {
@@ -18,33 +20,50 @@ class CityFinderViewController: UIViewController {
         didSet {
             cityListTableView.delegate = self
             cityListTableView.dataSource = self
+            cityListTableView.allowsSelection = false
             cityListTableView.register(UINib(nibName: "CityTableViewCell", bundle: nil), forCellReuseIdentifier: "CityTableViewCell")
             cityListTableView.register(UINib(nibName: "ErrorTableViewCell", bundle: nil), forCellReuseIdentifier: "ErrorTableViewCell")
             cityListTableView.rowHeight = UITableView.automaticDimension
+            cityListTableView.estimatedRowHeight = 64
         }
     }
     
-    let configurator = CityFinderConfiguratorImpl()
+    private let configurator = CityFinderConfiguratorImpl()
     var presenter: CityFinderPresenter?
-    var isNoCityExists = false
-    let searchController = UISearchController(searchResultsController: nil)
+    private var isNoCityExists = false
+    private let searchController = UISearchController(searchResultsController: nil)
+    
+    private var activityIndicator: UIActivityIndicatorView = {
+        let activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        activityIndicator.style = .gray
+        return activityIndicator
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        print(Date())
         configurator.configure(viewController: self)
-        
-        // Setup the Search Controller
+        setup()
+    }
+    
+    private func setup() {
+        presenter?.fetchCityList()
         searchController.searchResultsUpdater = self
         searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search City"
+        searchController.searchBar.placeholder = "Search.PlaceHolder".localized
         navigationItem.searchController = searchController
         navigationItem.hidesSearchBarWhenScrolling = false
         definesPresentationContext = true
-
+        navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.title = "Navigation.Title".localized
+        
+        let barButton = UIBarButtonItem(customView: activityIndicator)
+        self.navigationItem.setRightBarButton(barButton, animated: true)
+        activityIndicator.startAnimating()
     }
     
-    func isSearchActive() -> Bool {
+    private func isSearchActive() -> Bool {
         return searchController.isActive && !(searchController.searchBar.text?.isEmpty ?? true)
     }
 }
@@ -52,8 +71,12 @@ class CityFinderViewController: UIViewController {
 extension CityFinderViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if presenter?.getListOfCities(withSearch: isSearchActive()) == 0{
+        
+        if presenter?.getListOfCities(withSearch: isSearchActive()) == 0 {
             isNoCityExists = true
+            if activityIndicator.isAnimating {
+                return 0
+            }
             return 1
         } else {
             isNoCityExists = false
@@ -85,12 +108,27 @@ extension CityFinderViewController: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
 }
 
 extension CityFinderViewController: CityFinderView {
     
     func reloadData() {
-        cityListTableView.reloadData()
+        DispatchQueue.main.async {
+            self.cityListTableView.reloadData()
+            print(Date())
+        }
+    }
+    
+    func showIndicator() {
+        activityIndicator.startAnimating()
+    }
+    
+    func hideIndicator(){
+        activityIndicator.stopAnimating()
     }
 }
 

@@ -21,8 +21,8 @@ class LocationServiceManager: NSObject, CLLocationManagerDelegate {
     
     func configure() {
         locationManager.requestWhenInUseAuthorization()
-//        self.locationManager.delegate = self
-//        currentLocation = locationManager.location
+        self.locationManager.delegate = self
+        currentLocation = locationManager.location
         self.startUpdatingLocation()
     }
     
@@ -59,20 +59,12 @@ class LocationServiceManager: NSObject, CLLocationManagerDelegate {
         return [.authorizedWhenInUse].contains(CLLocationManager.authorizationStatus())
     }
     
-    class func getAuthorizationStatus() -> CLAuthorizationStatus {
-        return CLLocationManager.authorizationStatus()
-    }
-    
 }
 
 extension LocationServiceManager {
     
     var getCurrentLocation: CLLocation? {
         return currentLocation
-    }
-    
-    var getAccuracy: CLLocationAccuracy? {
-        return locationManager.desiredAccuracy
     }
     
 }
