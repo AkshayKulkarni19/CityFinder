@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Device/LocationManager.swift"
-            timestampString = "579452593.05485"
+            timestampString = "579457714.528674"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "44"
@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.054924"
+            timestampString = "579457714.528749"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "62"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.055037"
+            timestampString = "579457714.528891"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "81"
@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.055144"
+            timestampString = "579457714.529014"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "70"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Device/Extension/String+Extension.swift"
-            timestampString = "579452593.055254"
+            timestampString = "579457714.529137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -86,11 +86,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.055307"
+            timestampString = "579457714.529192"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Domain/UseCase/CityList/CitiesListUseCase.swift"
-            timestampString = "579452593.055393"
+            timestampString = "579457714.529296"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.055555"
+            timestampString = "579457714.52948"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "35"
@@ -170,7 +170,7 @@
                   moduleName = "City Finder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/akshay.kulkarni/Projects/CityFinder/Find%20City/City%20Finder/City%20Finder/Presenter/CityFinderPresenter.swift"
-                  timestampString = "579452457.453413"
+                  timestampString = "579457714.591276"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -185,7 +185,7 @@
                   moduleName = "City Finder"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/akshay.kulkarni/Projects/CityFinder/Find%20City/City%20Finder/City%20Finder/Presenter/CityFinderPresenter.swift"
-                  timestampString = "579452457.455441"
+                  timestampString = "579457714.59426"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "35"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Presenter/CityFinderPresenter.swift"
-            timestampString = "579452593.055612"
+            timestampString = "579457714.529555"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "37"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Domain/UseCase/CityList/CitiesListUseCase.swift"
-            timestampString = "579452593.055668"
+            timestampString = "579457714.529631"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "30"
@@ -234,7 +234,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Data/Services/Cities/CitiesListServices.swift"
-            timestampString = "579451602.272987"
+            timestampString = "579456478.0202039"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "22"
@@ -250,11 +250,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City FinderTests/City Finder/CitiesListServicesMock.swift"
-            timestampString = "579452593.055765"
+            timestampString = "579457714.529748"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "17"
+            endingLineNumber = "17"
             landmarkName = "fetchCityListFromJSON(completionHandler:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -266,12 +266,60 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "City Finder/Domain/UseCase/CityList/CitiesListUseCase.swift"
-            timestampString = "579452593.055819"
+            timestampString = "579457714.52981"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "34"
             endingLineNumber = "34"
             landmarkName = "fetchCityListFromJSON(completionHandler:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "City FinderTests/City Finder/CityListUseCaseTests.swift"
+            timestampString = "579457714.529874"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "testExample()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "City FinderTests/City Finder/CityFinderPresenterTests.swift"
+            timestampString = "579457714.529928"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "testAllCityInfoData_WithEmptyString()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "City Finder/Presenter/CityFinderPresenter.swift"
+            timestampString = "579457714.530629"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
+            landmarkName = "fetchCityList()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
