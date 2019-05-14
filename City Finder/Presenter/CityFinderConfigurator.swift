@@ -20,6 +20,5 @@ class CityFinderConfiguratorImpl: CityFinderConfigurator {
         let useCase  = CityListUseCaseImpl(cityListRepository: repository)
         let cityFinderPresenter = CityFinderPresenterImpl(cityListUseCase: useCase, cityFinderView: viewController)
         viewController.presenter = cityFinderPresenter
-        
     }
 }

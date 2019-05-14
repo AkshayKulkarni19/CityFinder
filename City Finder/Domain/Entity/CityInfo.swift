@@ -12,6 +12,7 @@ struct CityInfo {
     var coord: Coordinate
     var country: String
     var name: String
+    var distanceFromCurrentLocation: Double?
 }
 
 struct Coordinate {

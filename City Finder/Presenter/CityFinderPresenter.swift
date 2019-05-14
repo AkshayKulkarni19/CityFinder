@@ -7,57 +7,78 @@
 //
 
 import Foundation
+import CoreLocation
 
 protocol CityFinderPresenter {
-    func getNumberOfCities() -> Int
-    func city(at index: Int) -> CityInfo
+    func getListOfCities(withSearch: Bool) -> Int
+    func city(at index: Int, withSearch: Bool) -> CityInfo
     func filterContentForSearchText(_ searchText: String)
+    func fetchCityList()
 }
 
 class CityFinderPresenterImpl: CityFinderPresenter {
 
-    private let cityListUseCase: CityListUseCase
+    let cityListUseCase: CityListUseCase
     private weak var cityFinderView: CityFinderView?
-    private var filteredCityListInfo = [CityInfo]()
-    private var allCityListInfo = [CityInfo]()
+    var dictionaryOfCityList = CityDictionary(dictionaryOfCity: [Character : [CityInfo]]())
+    var filteredCityListInfo = [CityInfo]()
+    var allCityListInfo = [CityInfo]()
     
     init(cityListUseCase: CityListUseCase, cityFinderView: CityFinderView) {
         self.cityListUseCase = cityListUseCase
         self.cityFinderView = cityFinderView
-        self.fetchCityList()
     }
     
-    private func fetchCityList() {
-        cityListUseCase.fetchCityListFromJSON {[weak self] (result) in
-        
-            switch result {
-            case .success(let cityListInfo):
-                print(cityListInfo.count)
-                self?.allCityListInfo = cityListInfo
-                self?.filteredCityListInfo = cityListInfo
-                self?.cityFinderView?.reloadData()
-            case .failure(let error):
-                print(error.localizedDescription)
-                //completionHandler(.failure(error))
+    func fetchCityList() {
+        cityFinderView?.showIndicator()
+        DispatchQueue.global(qos: .userInteractive).async {
+            self.cityListUseCase.fetchCityListFromJSON {[weak self] (result) in
+            
+                switch result {
+                case .success(let cityDict, let cityListInfo):
+                    self?.allCityListInfo = cityListInfo
+                    self?.dictionaryOfCityList = cityDict
+                    DispatchQueue.main.async {
+                        self?.cityFinderView?.reloadData()
+                        self?.cityFinderView?.hideIndicator()
+                    }
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
         }
     }
     
-    func getNumberOfCities() -> Int {
-        return filteredCityListInfo.count
+    func getListOfCities(withSearch: Bool) -> Int {
+        if withSearch {
+            return filteredCityListInfo.count
+        } else {
+            return allCityListInfo.count
+        }
     }
     
-    func city(at index: Int) -> CityInfo {
-        return filteredCityListInfo[index]
+    func city(at index: Int, withSearch: Bool) -> CityInfo {
+        if withSearch {
+            return filteredCityListInfo[index]
+        } else {
+            return allCityListInfo[index]
+        }
     }
     
     func filterContentForSearchText(_ searchText: String) {
-//        filteredCityListInfo = allCityListInfo.filter{ $0.name.lowercased().starts(with: searchText.lowercased()) }
-        filteredCityListInfo = allCityListInfo.filter({( city : CityInfo) -> Bool in
-            print(searchText)
-            return city.name.lowercased().starts(with:searchText)
-        })
+
+        if let startsWithChar = searchText.first, let citiesStartsWith = dictionaryOfCityList.dictionaryOfCity[startsWithChar]{
+            filteredCityListInfo = citiesStartsWith
+        }
+        
+        filteredCityListInfo = filteredCityListInfo.filter{ $0.name.uppercased().starts(with:searchText) }.map { (city) -> CityInfo in
+            var filteredCity = city
+            filteredCity.distanceFromCurrentLocation =  LocationServiceManager.shared.getCurrentLocation?.distance(from: CLLocation(latitude: city.coord.lat, longitude: city.coord.lon)).toMiles
+            return filteredCity
+        }
+
         cityFinderView?.reloadData()
     }
+
 }
 
