@@ -10,71 +10,104 @@ import XCTest
 @testable import City_Finder
 
 class CityFinderPresenterTests: XCTestCase {
-
+    
     var presenter: CityFinderPresenterImpl!
+    var controller: MockCityFinderViewController!
     
     override func setUp() {
         // Put setup code here. This method is called before the invocation of each test method in the class.
         
-        let controller = MockCityFinderViewController()
+        controller = MockCityFinderViewController()
         let service = CitiesListServicesMock()
         let repository = CityListRepositoryImpl(cityListServices: service)
         let useCase  = CityListUseCaseImpl(cityListRepository: repository)
-        
         presenter = CityFinderPresenterImpl(cityListUseCase: useCase, cityFinderView: controller)
+        presenter.dictionaryOfCityList = CityDictionaryMock.mockData()
+        presenter.allCityListInfo = MockCityInfo.getCities()
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        presenter = nil
+        controller = nil
     }
-
-    func testNumberOfCities() {
-        
+    
+    func testFilterWithA_Valid() {
         //when
-        var loadingexp = expectation(description: "")
-//        presenter.cityListUseCase.fetchCityListFromJSON { (result) in
-//            switch result {
-//            case .success(let cityDict, let cityListInfo):
-//                XCTAssertTrue(cityListInfo.count > 0, " allCityListInfo count must be greater than 0")
-//            case .failure(let error):
-//                XCTFail("Failed to load json")
-//            }
-//            loadingexp.fulfill()
-//        }
-        
-        loadingexp.fulfill()
-
-        //then
-        XCTAssertTrue(presenter.allCityListInfo.count > 0, " allCityListInfo count must be greater than 0")
-        
-        
-        waitForExpectations(timeout: 10, handler: nil)
+        presenter.filterContentForSearchText("A")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 2, "filteredCityListInfo must contain 2 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
+    
+    func testFilterWithP_Valid() {
+        //when
+        presenter.filterContentForSearchText("P")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 2, "filteredCityListInfo must contain 2 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
+    }
+    
+    func testFilterWithB_InValid() {
+        //when
+        presenter.filterContentForSearchText("B")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 0, "filteredCityListInfo must contain 0 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
+    }
+    
+    func testFilterWithSpecialChar_InValid() {
+        //when
+        presenter.filterContentForSearchText("@")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 0, "filteredCityListInfo must contain 0 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
+    }
+    
+    func testAllCityInfoData_WithEmptyString() {
+        //when
+        presenter.filterContentForSearchText("")
+        XCTAssertEqual(presenter.allCityListInfo.count, 6, "filteredCityListInfo must contain 6 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
+    }
+    
+    func testFilterDataFromJson() {
+        
+        //Given
+        let expect = expectation(description: "wait until data loads")
+        presenter.fetchCityList()
+        
+        presenter.fetchListcompletion = {
+            
+            //When
+            self.presenter.filterContentForSearchText("A")
+            
+            //Then
+            XCTAssertEqual(self.presenter.allCityListInfo.count, 16, "filteredCityListInfo must contain 16 values")
+            XCTAssertTrue(self.controller.showIndicatorCalled, "showIndicator() method does not called")
+            XCTAssertTrue(self.controller.hideIndicatorCalled, "hideIndicator() method does not called")
+            
+            XCTAssertEqual(self.presenter.filteredCityListInfo.count, 1, "filteredCityListInfo must contain 1 values")
+            
+            expect.fulfill()
         }
+        
+        wait(for: [expect], timeout: 10)
     }
-
+    
 }
-
-
 
 class MockCityFinderViewController: CityFinderView {
     
+    var reloadDataCalled = false
     func reloadData() {
-        
+        reloadDataCalled = true
     }
     
+    var showIndicatorCalled = false
     func showIndicator() {
-        
+        showIndicatorCalled = true
     }
     
+    var hideIndicatorCalled = false
     func hideIndicator() {
-        
+        hideIndicatorCalled = true
     }
-    
     
 }

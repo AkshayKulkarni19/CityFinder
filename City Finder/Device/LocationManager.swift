@@ -44,10 +44,6 @@ class LocationServiceManager: NSObject, CLLocationManagerDelegate {
         currentLocation = locationManager.location
     }
     
-    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
-        //currentLocation = nil
-    }
-    
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         if status == .authorizedWhenInUse {
             currentLocation = locationManager.location

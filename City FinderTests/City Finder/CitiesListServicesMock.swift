@@ -13,8 +13,10 @@ class CitiesListServicesMock: CityListServices {
     
     func fetchCityListFromJSON(completionHandler: @escaping CityListResponseCompletion) {
         do {
-            guard let data = FileReader.getDataFromFile(fileName: "citiesmock", type: "json") else {
-                return
+            
+            guard let path = Bundle(for: type(of: self)).path(forResource: "citiesmock", ofType: "json"),
+                let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
+                    return
             }
             let listOfCities = try JSONDecoder().decode([CityInfoResponse].self, from: data)
             completionHandler(.success(listOfCities))
