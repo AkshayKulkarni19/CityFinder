@@ -19,34 +19,34 @@ class CityListUseCaseTests: XCTestCase {
         let repository = CityListRepositoryImpl(cityListServices: service)
         useCase  = CityListUseCaseImpl(cityListRepository: repository)
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
-
-    func testExample() {
+    
+    func testFetchData() {
         
-        let expections = expectation(description: "")
-        
+        let expection = expectation(description: "")
+        //when
         useCase.fetchCityListFromJSON { (result) in
             
             switch result {
             case .success(let cityDict, let cityListInfo):
-                print("*************** \(cityListInfo.count)")
+                
+                //then
+                XCTAssertNotNil(cityDict)
+                XCTAssertNotNil(cityListInfo)
+                XCTAssertTrue(cityDict.dictionaryOfCity.count > 0)
+                XCTAssertTrue(cityListInfo.count > 0)
+                
+                expection.fulfill()
+                
             case .failure(let error):
-                print(error.localizedDescription)
+                XCTFail(error.localizedDescription)
             }
-            expections.fulfill()
         }
-        waitForExpectations(timeout: 30) { (error) in
-            print("*************** \(error)")
-        }
+        
+        wait(for: [expection], timeout: 10)
     }
-
-    func testPerformanceExample() {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    
 }

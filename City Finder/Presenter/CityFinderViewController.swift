@@ -42,7 +42,6 @@ class CityFinderViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print(Date())
         configurator.configure(viewController: self)
         setup()
     }
@@ -119,15 +118,16 @@ extension CityFinderViewController: CityFinderView {
     func reloadData() {
         DispatchQueue.main.async {
             self.cityListTableView.reloadData()
-            print(Date())
         }
     }
     
     func showIndicator() {
+        searchController.searchBar.isUserInteractionEnabled = false
         activityIndicator.startAnimating()
     }
     
     func hideIndicator(){
+        searchController.searchBar.isUserInteractionEnabled = true
         activityIndicator.stopAnimating()
     }
 }

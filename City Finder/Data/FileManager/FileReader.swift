@@ -14,11 +14,6 @@ class FileReader {
         if let path = Bundle.main.path(forResource: fileName, ofType: type) {
             return try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
         }
-        
         return nil
-//        let docsPath = Bundle.main.resourcePath! + "/"
-//        FileManager.default.c
-//        return FileManager.default.contents(atPath: docsPath + fileName + )
-        
     }
 }

@@ -16,7 +16,7 @@ class CitiesListServicesMock: CityListServices {
             
             guard let path = Bundle(for: type(of: self)).path(forResource: "citiesmock", ofType: "json"),
                 let data = try? Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe) else {
-                return
+                    return
             }
             let listOfCities = try JSONDecoder().decode([CityInfoResponse].self, from: data)
             completionHandler(.success(listOfCities))

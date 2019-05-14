@@ -10,7 +10,7 @@ import XCTest
 @testable import City_Finder
 
 class CityFinderPresenterTests: XCTestCase {
-
+    
     var presenter: CityFinderPresenterImpl!
     var controller: MockCityFinderViewController!
     
@@ -23,59 +23,72 @@ class CityFinderPresenterTests: XCTestCase {
         let useCase  = CityListUseCaseImpl(cityListRepository: repository)
         presenter = CityFinderPresenterImpl(cityListUseCase: useCase, cityFinderView: controller)
         presenter.dictionaryOfCityList = CityDictionaryMock.mockData()
-        //presenter.allCityListInfo = MockCityInfo.getCities()
+        presenter.allCityListInfo = MockCityInfo.getCities()
     }
-
+    
     override func tearDown() {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
+        presenter = nil
+        controller = nil
     }
-
+    
     func testFilterWithA_Valid() {
         //when
         presenter.filterContentForSearchText("A")
-        XCTAssert(presenter.filteredCityListInfo.count == 2, "filteredCityListInfo must contain 2 values")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 2, "filteredCityListInfo must contain 2 values")
         XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
     }
     
     func testFilterWithP_Valid() {
         //when
         presenter.filterContentForSearchText("P")
-        XCTAssert(presenter.filteredCityListInfo.count == 2, "filteredCityListInfo must contain 2 values")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 2, "filteredCityListInfo must contain 2 values")
         XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
     }
     
     func testFilterWithB_InValid() {
         //when
         presenter.filterContentForSearchText("B")
-        XCTAssert(presenter.filteredCityListInfo.count == 0, "filteredCityListInfo must contain 2 values")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 0, "filteredCityListInfo must contain 0 values")
         XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
     }
     
     func testFilterWithSpecialChar_InValid() {
         //when
         presenter.filterContentForSearchText("@")
-        XCTAssert(presenter.filteredCityListInfo.count == 0, "filteredCityListInfo must contain 2 values")
+        XCTAssertEqual(presenter.filteredCityListInfo.count, 0, "filteredCityListInfo must contain 0 values")
         XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
     }
     
     func testAllCityInfoData_WithEmptyString() {
         //when
+        presenter.filterContentForSearchText("")
+        XCTAssertEqual(presenter.allCityListInfo.count, 6, "filteredCityListInfo must contain 6 values")
+        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
+    }
+    
+    func testFilterDataFromJson() {
         
-        let expect = expectation(description: "")
-        
+        //Given
+        let expect = expectation(description: "wait until data loads")
         presenter.fetchCityList()
         
-        presenter.filterContentForSearchText("")
+        presenter.fetchListcompletion = {
+            
+            //When
+            self.presenter.filterContentForSearchText("A")
+            
+            //Then
+            XCTAssertEqual(self.presenter.allCityListInfo.count, 16, "filteredCityListInfo must contain 16 values")
+            XCTAssertTrue(self.controller.showIndicatorCalled, "showIndicator() method does not called")
+            XCTAssertTrue(self.controller.hideIndicatorCalled, "hideIndicator() method does not called")
+            
+            XCTAssertEqual(self.presenter.filteredCityListInfo.count, 1, "filteredCityListInfo must contain 1 values")
+            
+            expect.fulfill()
+        }
         
-        expect.fulfill()
-        
-        XCTAssert(presenter.allCityListInfo.count == 16, "allCityListInfo must contain 15 values")
-        
-        
-        
-        XCTAssertTrue(controller.reloadDataCalled, "reloadData() method does not called")
-        
-        wait(for: [expect], timeout: 15)
+        wait(for: [expect], timeout: 10)
     }
     
 }
